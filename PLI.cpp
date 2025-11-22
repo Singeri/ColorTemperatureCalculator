@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
+//this sort of assumes you hvae the SFML library, just use SDL3 or windows.h
 #include <iostream>
 #include <cmath>
 #include <algorithm>
 #include <optional>
 
-using namespace std;
+using namespace std; //Why are you using "using namespace std;"??
 
 const double c = 3e8;      // Speed of light (m/s)
 const double k = 1.38e-23; // Boltzmann constant (J/K)
@@ -12,7 +13,9 @@ const double h = 6.626e-34; // Planck constant (J*s)
 
 // Converting nm to meters
 double nm_to_m(double nm) {
-    return nm * 1e-9;
+    //return nm * 1e-9; //I'm not sure why that's multiplication, division is alot more obvious no?
+    return nm / 1e9;
+    
 }
 
 // Planck's law intensity
@@ -55,6 +58,9 @@ int main() {
 
     sf::RectangleShape rectangle(sf::Vector2f(400, 600));
     rectangle.setFillColor(sf::Color(R, G, B));
+
+    window.setVerticalSyncEnabled(true);
+    //I Don't use SFML but apparently you probably should do this so the loop isn't at 100% CPU usage (Loud laptop noises are annoying)
 
     while (window.isOpen()) {
         while (const optional<sf::Event> eventOpt = window.pollEvent()) {
